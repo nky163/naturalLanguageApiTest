@@ -1,8 +1,10 @@
 // 'Passkeys на Apple (Webauthn passwordless), в комбинации с сильной биометрией и Secure Enclave сделаны очень хорошо. Хранить ключи немного стремно в Keychain, но как только завезут их в 1Password можно будет переходить. Пароли/SMS это зло во всех отношениях.'
-// code: 3,
+// {
+//   code: 3,
 //   details: 'The language ru is not supported for document_sentiment analysis.',
 //   metadata: Metadata { internalRepr: Map(0) {}, options: {} },
 //   note: 'Exception occurred in retry method that was not classified as transient'
+// }
 
 
 const rewire = require('rewire');
@@ -30,6 +32,12 @@ describe('nlpCallのテスト', function() {
     const nlpCall = target.__get__('nlpCall');
     
     const input = 'Passkeys на Apple (Webauthn passwordless), в комбинации с сильной биометрией и Secure Enclave сделаны очень хорошо. Хранить ключи немного стремно в Keychain, но как только завезут их в 1Password можно будет переходить. Пароли/SMS это зло во всех отношениях.';
+    try {
+      await nlpCall(input);
+    } catch (error) {
+      assert.strictEqual(error instanceof Error, true);
+      
+    }
     await expect(nlpCall(input)).to.be.rejectedWith(Error);
   });
   
@@ -41,6 +49,7 @@ describe('nlpCallのテスト', function() {
     try {
       await nlpCall(input);
     } catch (error) {
+      assert.strictEqual(error instanceof Error, true);
       assert.strictEqual(error.critical, true);
     }
   })

@@ -35,6 +35,10 @@ const nlpCall = async (reviewText) => {
       }
       result = await analyzeSentiment(reviewText);
     } catch(error) {
+      if (error.code === 3) {
+        error.critical = true;
+        throw error;
+      }
       console.log(`NaturalLanguageAPI Error(${retryCount + 1} time).`, error);
     }
     
