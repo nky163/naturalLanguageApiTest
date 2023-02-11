@@ -12,7 +12,7 @@ const expect = chai.expect;
 chai.use(require('chai-as-promised'));
 
 describe('nlpCallのテスト', function() {
-  this.timeout(3000);
+  this.timeout(30000);
   
   it('サポート言語の場合、感情分析結果を返す', async () => {
     
@@ -24,7 +24,7 @@ describe('nlpCallのテスト', function() {
     assert.isNumber(ret.score);
   });
   
-  it('分析に失敗した場合、例外が発生する', async () => {
+  it('感情分析に失敗した場合、例外が発生する', async () => {
     
     const target = rewire('../../../convert/review/index.js');
     const nlpCall = target.__get__('nlpCall');
