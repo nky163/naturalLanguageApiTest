@@ -2,6 +2,7 @@ const language = require('@google-cloud/language');
 // const {setTimeout} = require('timers/promise');
 
 NLP_RETRY_COUNT = 3;
+NLP_WAIT_MS = 600;
 
 const mySetTimeout = (ms) => {
   return new Promise((resolve, reject) => {
@@ -31,7 +32,7 @@ const nlpCall = async (reviewText) => {
     try {
       if (retryCount > 0) {
         console.log('Sleep for 60 sec.');
-        await mySetTimeout(600);
+        await mySetTimeout(NLP_WAIT_MS);
       }
       result = await analyzeSentiment(reviewText);
     } catch(error) {

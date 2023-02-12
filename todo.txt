@@ -1,0 +1,4 @@
+[] nlpCallの現在の仕様に合わせてテストを追加
+[] nlpCallのリファクタリング
+[] nlpCallのテストを追加(サポート外言語の時)
+[] NaturalLanguageAPIコールをスタブ化、リファクタリング
